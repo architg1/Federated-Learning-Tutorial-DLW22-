@@ -23,12 +23,8 @@ if __name__ == "__main__":
     x_test = utils.featureSelection(df_test)[0]  # feature selection
     y_test = utils.featureSelection(df_test)[1]
 
-    # here
-    model = LogisticRegression(
-        penalty="l2",
-        max_iter=1,  # local epoch
-        warm_start=True,  # prevent refreshing weights when fitting
-    )
+    # Make a Logistic Regression model
+    model = -1
 
     # Setting initial parameters
     utils.set_initial_params(model)
@@ -47,9 +43,12 @@ if __name__ == "__main__":
             return utils.get_model_parameters(model), len(x_train), {}
 
         def evaluate(self, parameters, config):  # type: ignore
-            utils.set_model_params(model, parameters)
-            loss = log_loss(y_test, model.predict_proba(x_test))
-            accuracy = model.score(x_test, y_test)
+            # set model to learned parameters
+            utils.set_model_params()
+            # calculate loss
+            loss = -1
+            # calculate accuracy
+            accuracy = -1
             return loss, len(x_test), {"accuracy": accuracy}
 
 
