@@ -1,4 +1,3 @@
-# import tensorflow as tf  # required for compilation on local device
 import flwr as fl
 import utils
 from sklearn.metrics import log_loss
@@ -14,7 +13,7 @@ def fit_round(server_round: int) -> Dict:
 
 def get_evaluate_fn(model: LogisticRegression):
     """Return an evaluation function for server-side evaluation."""
-    df_test = pd.read_csv("/Users/architg/Desktop/Work/Misc./Federated Learning Tutorial (DLW22)/Network Intrusion Dataset/script_test.csv")
+    df_test = pd.read_csv("script_test.csv")
     df_test = utils.dataProcessing(df_test)  # data processing
     x_test = utils.featureSelection(df_test)[0]  # feature selection
     y_test = utils.featureSelection(df_test)[1]
@@ -32,9 +31,10 @@ def get_evaluate_fn(model: LogisticRegression):
 
 # Start Flower server for three rounds of federated learning
 if __name__ == "__main__":
-    model = LogisticRegression()
+    model = LogisticRegression() # EDIT
     utils.set_initial_params(model)
 
+    # EDIT
     fed_avg_strategy = fl.server.strategy.FedAvg(
         min_available_clients=2,
         evaluate_fn=get_evaluate_fn(model),

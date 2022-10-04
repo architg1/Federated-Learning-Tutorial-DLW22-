@@ -12,18 +12,18 @@ if __name__ == "__main__":
     # loading the dataset
 
     # loading the train set
-    df_train = pd.read_csv("/Users/architg/Desktop/Work/Misc./Federated Learning Tutorial (DLW22)/Network Intrusion Dataset/script_train.csv")
+    df_train = pd.read_csv("script_train.csv")
     df_train = utils.dataProcessing(df_train)  # data processing
     x_train = utils.featureSelection(df_train)[0]  # feature selection
     y_train = utils.featureSelection(df_train)[1]
 
     # loading the test set
-    df_test = pd.read_csv("/Users/architg/Desktop/Work/Misc./Federated Learning Tutorial (DLW22)/Network Intrusion Dataset/script_test.csv")
+    df_test = pd.read_csv("script_test.csv")
     df_test = utils.dataProcessing(df_test)  # data processing
     x_test = utils.featureSelection(df_test)[0]  # feature selection
     y_test = utils.featureSelection(df_test)[1]
 
-    # here
+    # EDIT
     model = LogisticRegression(
         penalty="l2",
         max_iter=1,  # local epoch
@@ -48,8 +48,8 @@ if __name__ == "__main__":
 
         def evaluate(self, parameters, config):  # type: ignore
             utils.set_model_params(model, parameters)
-            loss = log_loss(y_test, model.predict_proba(x_test))
-            accuracy = model.score(x_test, y_test)
+            loss = log_loss(y_test, model.predict_proba(x_test)) # EDIT
+            accuracy = model.score(x_test, y_test) # EDIT
             return loss, len(x_test), {"accuracy": accuracy}
 
 
